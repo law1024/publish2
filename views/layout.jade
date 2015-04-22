@@ -2,6 +2,10 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/css/style.css')
+    block css
+        link(rel="stylesheet", href='/css/reset.css')
+        link(rel='stylesheet', href='/css/common.css')
   body
     block content
+    block js
+        script(src="/js/vender/require.js", data-main="/js/main")

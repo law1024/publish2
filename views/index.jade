@@ -1,4 +1,22 @@
 extends layout
-
+append css
+    link(rel="stylesheet" href="/css/menu.css")
 block content
-  h1= title
+    header.header
+    .wrap
+        section.phone-wrap
+            .phone
+                .phone-header
+                    .phone-receiver
+                .phone-content
+                    .phone-screen
+                        .top-bar
+                        .top-header
+                        .page-content
+                            .page-container#page-container
+
+                .phone-footer
+
+            .page-switchover#switchover
+                span(data-turn="prev")
+                span(data-turn="next")
