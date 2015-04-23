@@ -7,13 +7,16 @@ require.config({
 require([
     'jquery',
     'pager',
-    'menu'
+    'menu',
+    'dialog'
 ], function(
     $,
     pager,
-    menu
+    menu,
+    dialog
 ) {
 
+    var dialogs = {};
 
     function initPage() {
         pager.add();        
@@ -33,7 +36,10 @@ require([
         menu.attach("#page-container", [
             /*{header: 'Options'},*/
             {
-                text: '背景'
+                text: '背景',
+                action: function() {
+                    dialogs.backgroundDialog.open();
+                }
             },
             {divider: true},
             {
@@ -50,10 +56,16 @@ require([
                 text: "页面",
                 subMenu: [
                     {
-                        text: '上方插入页'
+                        text: '上方插入页',
+                        action: function() {
+                            pager.before();
+                        }
                     },
                     {
-                        text: '下方插入页'
+                        text: '下方插入页',
+                        action: function() {
+                            pager.after();
+                        }
                     },
                     {
                         text: '删除当前页'
@@ -63,8 +75,25 @@ require([
         ]);
     }
 
+    //初始化弹窗
+    function initDialog() {
+
+        // 背景图片选择弹窗
+        var backgroundDialog = dialog.getInstance({
+            id     : 'background-dialog',
+            title  : '背景',
+            content: 'hello world'
+        });
+
+        dialogs.backgroundDialog = backgroundDialog;
+        //数据的传递
+    }
+
     function main() {
+        // 弹窗map
         initPage();
+        initDialog();
+
         initMenu();
     }
 

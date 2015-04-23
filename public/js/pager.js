@@ -54,9 +54,37 @@ define([
         getInstance: function() {
             return new Pager();
         },
-
         add: function() {
             this.$container.append(this.getInstance().$view);
+        },
+        // 在当前页前插入页
+        before: function() {
+            this.currentPage().$view.before(this.getInstance().$view);
+            this.next(true);
+            //debugger;
+            setTimeout(function() {
+                this.prev(false);
+            }.bind(this));
+        },
+        // 在当前页后插入页
+        after: function() {
+            this.currentPage().$view.after(this.getInstance().$view);
+            // 移动到该页
+            this.next();
+        },
+        //删除当前页
+        remove: function(index) {
+            if (index >= this.totalPages()) {
+                //index超长了
+                return;
+            }
+            var page = null;
+            if (!index) {
+                page = this.currentPage();
+            } else {
+                page = this.pageList[index];
+            }
+            //未完待续
         },
         // 获取totalPages
         totalPages: function() {
@@ -65,35 +93,38 @@ define([
 
         // 获取当前页面实例
         currentPage: function() {
-            return this.pageList[current];
+            return this.pageList[this.current];
         },
         // 向后翻页
-        next: function() {
-            console.log('next');
+        next: function(noTransition) {
             if (this.current >= this.totalPages() - 1) {
-                console.info('last page');
                 return;
             }
+            console.log('next');
             // 这里先写死翻页操作
-            this.move(-(this.current + 1) * 486).current ++;
+            this.move(-(this.current + 1) * 486, noTransition).current ++;
         },
-        prev: function() {
-            console.log('prev');
+        prev: function(noTransition) {
             if (this.current === 0) {
-                console.info('first page');
                 return;
             }
-            this.move(-(this.current - 1) * 486).current --;
-
+            console.log('prev');
+            this.move(-(this.current - 1) * 486, noTransition).current --;
         },
-        move: function(height) {
+
+        move: function(height, noTransition) {
+            if (noTransition) {
+                this.$container.removeClass('animate');
+            } else {
+                this.$container.addClass('animate');
+                //debugger;
+            }
             this.$container.css({
                 '-webkit-transform': 'translate(0, '+ height +'px) translateZ(0)',
                         'transform': 'translate(0, '+ height +'px) translateZ(0)'
             });
             return this;
         }
-
 
     });
 

@@ -95,6 +95,8 @@ a {
     left: 0;
     top: 0;
     width: 100%;
+}
+.page-container.animate {
     -webkit-transition: all .3s;
             transition: all .3s;
 }
