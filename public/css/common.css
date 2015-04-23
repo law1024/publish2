@@ -2,9 +2,25 @@ body {
     font-size: 14px;
     font-family: 'Microsoft YaHei';
 }
-
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.clearfix:after {
+    clear: both;
+}
 a {
   color: #00B7FF;
+}
+.button {
+    display: inline-block;
+    padding: .5em 1.75em;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: #4390c3;
 }
 /*phone*/
 .phone-wrap {

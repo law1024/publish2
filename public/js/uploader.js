@@ -1,12 +1,13 @@
 define([
-  "jquery"
+  "jquery",
+  "modules/draggable"
 ],
 function(
-  $
+  $,
+  draggable
 ) {
   //图片list
   var fileList = [];
-
   //对上传的文件进行进一步的处理
   function packaging(file, callback) {
     //console.log(file);
@@ -20,6 +21,7 @@ function(
     };
 
     if (/\.(png|jpg|jpeg)/.test(postfix)) {
+      /*
       //如果是图片，直接将dataURL返回
       var reader = new FileReader();
       //onload事件
@@ -30,8 +32,11 @@ function(
       }, false);
 
       reader.readAsDataURL(file);
+      */
       //将文件放到fileList
-      fileList.push(data);
+      //fileList.push(data);
+      uploader.upload(file, callback);
+
     } else {
       console.log("上传的是多媒体");
     }
@@ -39,7 +44,20 @@ function(
 
   var uploader = {
 
-    register: function($button, callback) {
+    register: function(opts, callback) {
+      if (opts.$drag.length) {
+        draggable.init(opts.$drag);
+        //添加事件监听
+        draggable.on('file', function(file) {
+          packaging(file, callback);
+        });
+      }
+
+      if (!opts.$button) {
+        return;
+      }
+      var $button = opts.$button;
+
       $button.each(function(idx, item) {
         var $item = $(item);
         var $input;
@@ -78,9 +96,13 @@ function(
       });
     },
 
-    upload: function(file) {
-      if (!!file) {
+    upload: function(file, callback) {
 
+      if (!!file) {
+        console.log(file);
+        //上传文件
+        
+        
       } else {
         //上传整个fileList
       }

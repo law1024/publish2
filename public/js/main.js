@@ -8,12 +8,16 @@ require([
     'jquery',
     'pager',
     'menu',
-    'dialog'
+    'dialog',
+    'tab',
+    'uploader'
 ], function(
     $,
     pager,
     menu,
-    dialog
+    dialog,
+    tab,
+    uploader
 ) {
 
     var dialogs = {};
@@ -82,7 +86,7 @@ require([
         var backgroundDialog = dialog.getInstance({
             id     : 'background-dialog',
             title  : '背景',
-            content: 'hello world'
+            content: $('#image-template').html()
         });
 
         dialogs.backgroundDialog = backgroundDialog;
@@ -95,6 +99,15 @@ require([
         initDialog();
 
         initMenu();
+        //初始化tab选项
+        tab.register('.tab');
+
+        //初始化图片上传按钮
+        uploader.register({
+            $drag  : $('.image-content'),
+            $button: $('.add-image-button')
+        });
+
     }
 
     main();

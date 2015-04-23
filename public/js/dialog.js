@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'moveable'
+    'modules/moveable'
 ], function(
     $,
     moveable
@@ -47,7 +47,7 @@ define([
             this.$sure = $view.find(".sure");
         }
         this.$view.css({    
-            top : 100,
+            top : 80,
             left: $(document).width() / 2
         });
         //绑定确定事件
