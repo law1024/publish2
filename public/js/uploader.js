@@ -17,7 +17,8 @@ function(
     var data = {
       name: "img" + new Date().getTime(),
       type: postfix,
-      file: file
+      file: file,
+      size: file.size
     };
 
     if (/\.(png|jpg|jpeg)/.test(postfix)) {
@@ -35,7 +36,7 @@ function(
       */
       //将文件放到fileList
       //fileList.push(data);
-      uploader.upload(file, callback);
+      uploader.upload(data, callback);
 
     } else {
       console.log("上传的是多媒体");
@@ -43,7 +44,10 @@ function(
   }
 
   var uploader = {
+    // 文件上传接口
+    server  : '/publish/fileupload',
 
+    // 注册
     register: function(opts, callback) {
       if (opts.$drag.length) {
         draggable.init(opts.$drag);
@@ -96,13 +100,36 @@ function(
       });
     },
 
-    upload: function(file, callback) {
+    upload: function(data, callback) {
 
-      if (!!file) {
-        console.log(file);
+      if (!!data) {
         //上传文件
-        
-        
+        var form = new FormData();
+        var idx;
+
+        for (idx in data) {
+          if (!data.hasOwnProperty(idx)) {
+            continue;
+          }
+          form.append(idx, data[idx]);
+        }
+
+        $.ajax({
+          url : this.server,
+          type: 'POST',
+          data: form,
+          processData: false,
+          contentType: false,
+          // success
+          success: function(res) {
+            console.log(res);
+          },
+          // fail
+          fail: function() {
+            console.log('err');
+          }
+        });
+
       } else {
         //上传整个fileList
       }
