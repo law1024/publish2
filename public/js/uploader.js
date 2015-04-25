@@ -123,6 +123,13 @@ function(
           // success
           success: function(res) {
             console.log(res);
+            // ok
+            if (res.status === 0) {
+              callback(res.src);
+            } else {
+              // 上传失败
+              // 提示
+            }
           },
           // fail
           fail: function() {

@@ -18,6 +18,8 @@ router.post('/publish/fileupload', function(req, res) {
     var form = new formidable.IncomingForm();
 
     form.parse(req, function(err, fields, files) {
+        // fields中保存了其他自定义信息
+        
         res.end(util.inspect({fields: fields, files: files}));
     });
 });
