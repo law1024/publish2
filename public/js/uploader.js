@@ -45,7 +45,7 @@ function(
 
   var uploader = {
     // 文件上传接口
-    server  : '/publish/fileupload',
+    server  : '/fileupload/',
 
     // 注册
     register: function(opts, callback) {

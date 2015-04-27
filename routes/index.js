@@ -77,6 +77,8 @@ router.get('/index/', function(req, res) {
     var suid = req.session.uid;
 
     if (cuid === suid && suid !== undefined) {
+        // 这个时候有很多初始化的工作要做，
+        // 首先将用户所有编辑过的页面展示出来
         res.render('index', data);
     } else {
         //登录
@@ -97,9 +99,9 @@ router.post('/fileupload/', function(req, res) {
         form.parse(req, function(err, fields, files) {
             // fields中保存了其他自定义信息
             // 获取该用户的文件夹
-            
             res.send({
-
+                'status': 0,
+                'src'   : 'http://d.3987.com/keai_140909/001.jpg'
             });
         });
     } else {

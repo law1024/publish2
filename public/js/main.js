@@ -89,6 +89,17 @@ require([
             content: $('#image-template').html()
         });
 
+        //初始化图片上传按钮
+        var $backgroundView = backgroundDialog.$view;
+
+        uploader.register({
+            $drag  : $('.image-content', $backgroundView),
+            $button: $('.add-image-button', $backgroundView),
+        },
+        function(src) {
+            console.log(src);
+        });
+
         dialogs.backgroundDialog = backgroundDialog;
         //数据的传递
     }
@@ -102,11 +113,6 @@ require([
         //初始化tab选项
         tab.register('.tab');
 
-        //初始化图片上传按钮
-        uploader.register({
-            $drag  : $('.image-content'),
-            $button: $('.add-image-button')
-        });
 
     }
 
