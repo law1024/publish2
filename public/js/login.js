@@ -4,9 +4,8 @@
 
     // 发送数据请求
     function send(data) {
-        console.log(data);
         $.ajax({
-            url : '/publish/login/',
+            url : '/login/',
             data: data,
             type: 'POST',
             dataType: 'json',
@@ -25,7 +24,7 @@
     }
 
     $('#login-button').on('click', function() {
-        console.log(111);
+        console.info('login');
         send($form.serialize());
     });
 
