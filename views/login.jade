@@ -1,0 +1,25 @@
+extends layout
+append css
+    link(rel="stylesheet", href="/css/login.css")
+block content
+    .wrapper
+        .login-container
+            form#form(action="/publish/login" method="post")
+
+                .form-item
+                    input(
+                        type="text"
+                        name="email"
+                        placeholder="邮箱")
+                .form-item
+                    input(
+                        type="password"
+                        name="password"
+                        placeholder="密码")
+                .form-item
+
+                    a.login-button#login-button(href="javascript:;") 登录
+
+block js
+    script(src="/js/vender/jquery.js")
+    script(src="/js/login.js")
